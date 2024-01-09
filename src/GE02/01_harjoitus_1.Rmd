@@ -8,7 +8,7 @@ Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.
 
 Harjoituksen jälkeen osallistuja osaa lisätä ja luoda tasoja QGISiin.
 
-**Arvioitu kesto**
+**Arvioitu kesto** 
 
 30 minuuttia.
 
