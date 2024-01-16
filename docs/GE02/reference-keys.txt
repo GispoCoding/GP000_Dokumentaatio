@@ -4,7 +4,7 @@ lukuohje
 mistä-lisätietoja
 virheet
 lisenssi-ja-oikeudet
-harjoitus-1-digitoinnin-perusteet
+harjoitus-1-digitoinnin-perusteet-test
 valmistautuminen
 muokkauksen-yleisasetukset
 editoinnin-valmistelu
