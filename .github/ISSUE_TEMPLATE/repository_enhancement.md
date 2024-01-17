@@ -2,7 +2,7 @@
 name: Repositorion kehitysidea
 about: Ilmoita kehitysidea repositorion prosesseihin
 title: ''
-labels: repository-enhancement
+labels: enhancement
 assignees: ''
 
 ---
