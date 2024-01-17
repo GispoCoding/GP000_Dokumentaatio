@@ -1,5 +1,7 @@
 # Harjoitus 1: Digitoinnin perusteet
 
+test
+
 **Harjoituksen sisältö**
 
 Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.
