@@ -30,8 +30,6 @@ jobs:
           IFS=" "
           read -ra folders <<< "$folder_list"
 
-          export WORKFLOW=true
-
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
             ./render.sh $code
@@ -40,8 +38,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: Docs
-          path: docs
+          name: preview_changed_docs
+          path: out
       
       - name: Add Comment
         uses: actions/github-script@v4
