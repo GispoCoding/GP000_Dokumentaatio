@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = "Preview changes [here](https://github.com/ + context.repo.owner + "/" + context.repo.repo + "/suites/" + context.context.payload.workflow_run.check_suit_id + "/artifacts/${{steps.upload-artifacts.outputs.artifact_id}})."
+            const body = "Preview changes [here](https://github.com/" + context.repo.owner + "/" + context.repo.repo + "/suites/" + context.context.payload.workflow_run.check_suit_id + "/artifacts/${{steps.upload-artifacts.outputs.artifact_id}})."
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
