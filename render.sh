@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-if [ "$ARTIFACT" = true]; then
-  mkdir /artifact/
-fi
-
 if [ -z "$1" ]; then
     echo "Usage: "
     echo "  Rendering one course: $0 <code>"
@@ -45,10 +41,4 @@ if [ "$WORKFLOW" = true ]; then
     rm -R out
 
     test -f "docs/$code/index.html"
-fi
-
-if [ "$ARTIFACT" = true]; then
-  echo "ARTIFACT is true"
-
-  mv "out/$code" "/artifact/$code"
 fi
