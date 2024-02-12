@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Docs
-          path: /docs/
+          path: docs
       
       - name: Add Comment
         uses: actions/github-script@v4
