@@ -35,7 +35,7 @@ jobs:
           IFS=" "
           read -ra folders <<< "$folder_list"
 
-          export WORKFLOW=true
+          export ARTIFACT=true
 
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
@@ -43,17 +43,19 @@ jobs:
           done
       
       - name: Upload artifacts
+        id: upload-artifacts
         uses: actions/upload-artifact@v4
         with:
           name: preview_changed_docs
           path: docs
+          retention-days: 7
       
       - name: Add Comment
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = "Preview changes here"
+            const body = "Preview changes [here](${{ steps.upload-artifacts.outputs.artifact_url }})."
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
