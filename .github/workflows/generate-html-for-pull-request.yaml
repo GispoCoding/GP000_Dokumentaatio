@@ -1,0 +1,58 @@
+name: Generate and serve changed course html files
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Find changed rmd or image files
+        id: changed-rmd
+        uses: tj-actions/changed-files@v41
+        with:
+            files:  |
+                src/G*/*.{rmd,Rmd}
+                src/G*/img/*.{png,gif}
+                src/G*/img/*/*.{png,gif}
+
+      - name: Render modified courses to HTML and move output to docs
+        run: |
+          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
+          IFS=" "
+          read -ra folders <<< "$folder_list"
+
+          export WORKFLOW=true
+
+          for folder in "${folders[@]}"; do
+            code="${folder#src/}"
+            ./render.sh $code
+          done
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Docs
+          path: /docs/
+      
+      - name: Add Comment
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = "Preview changes here"
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+        
