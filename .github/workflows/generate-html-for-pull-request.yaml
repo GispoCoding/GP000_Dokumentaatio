@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - src/G*/*
 
 jobs:
   build:
@@ -30,13 +32,15 @@ jobs:
           IFS=" "
           read -ra folders <<< "$folder_list"
 
+          export ARTIFACT=true
+
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
             ./render.sh $code
           done
       
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: preview_changed_docs
           path: out

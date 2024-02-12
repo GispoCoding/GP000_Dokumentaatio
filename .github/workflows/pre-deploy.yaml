@@ -1,9 +1,12 @@
 name: Pre-deploy
 on:
-    push:
-        paths:
-            - src/**/*
-            - assets/*
+  push:
+    branches:
+      - main
+    paths:
+        - src/**/*
+        - assets/*
+
 
 jobs:
   check-changes:
