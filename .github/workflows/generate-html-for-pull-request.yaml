@@ -49,13 +49,13 @@ jobs:
           name: preview_changed_docs
           path: artifact
           retention-days: 7
-      
+            
       - name: Add Comment
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = "Preview changes [here](hehe)."
+            const body = "Preview changes [here](https://github.com/ + context.repo.owner + "/" + context.repo.repo + "/suites/" + context.context.payload.workflow_run.check_suit_id + "/artifacts/${{steps.upload-artifacts.outputs.artifact_id}})."
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
