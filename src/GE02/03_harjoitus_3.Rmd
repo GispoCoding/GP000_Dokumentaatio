@@ -1,5 +1,9 @@
 # Harjoitus 3: Relaatiot
 
+
+test
+
+
 **Harjoituksen sisältö**
 
 Harjoituksessa opetellaan hyödyntämään ulkopuolisia tauluja aineiston editoinnissa.
