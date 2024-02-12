@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = "Preview changes [here](${{ steps.upload-artifacts.outputs.artifact_url }})."
+            const body = "Preview changes [here](${{ steps.upload-artifacts.outputs.artifact_id }})."
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
