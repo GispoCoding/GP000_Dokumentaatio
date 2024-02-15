@@ -10,6 +10,17 @@
     color:#eeeeee;
 }
 
+.in-view {
+  background-color: #edc949;
+
+  padding-left: 2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-right: 2em;
+
+  border-radius: 0.5em;
+}
+
 /* Generics */
 body { overflow-x: hidden; }
 

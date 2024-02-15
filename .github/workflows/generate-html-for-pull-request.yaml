@@ -8,7 +8,7 @@ on:
       - src/G*/*
 
 jobs:
-  build:
+  build-preview:
     runs-on: ubuntu-latest
 
     steps:

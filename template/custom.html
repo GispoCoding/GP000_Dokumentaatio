@@ -37,7 +37,7 @@ $endif$
 
 <meta name="description" content="$if(description)$$description$$else$$pagetitle$$endif$">
 
-<title>$pagetitle$</title>
+<title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
 $for(header-includes)$
 $header-includes$

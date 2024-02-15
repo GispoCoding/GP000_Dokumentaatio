@@ -86,3 +86,11 @@ Jos havaitset materiaalissa virheitä, niin pyydämme ilmoittamaan niistä koulu
 ## Lisenssi ja oikeudet
 
 Nämä materiaalit on "QGIS kaavoittajille"-kurssille kehittänyt Gispo Oy. Materiaalit on lisensoitu seuraavalla lisenssillä: [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/)
+
+### 3
+
+#### 4
+
+##### 5
+
+###### 6
