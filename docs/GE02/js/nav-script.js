@@ -57,7 +57,7 @@ window.addEventListener("scroll", () => {
     const headerTop = header.offsetTop;
     const headerHeight = header.clientHeight;
 
-    if (scrollY >= (headerTop - 100) - headerHeight)
+    if (scrollY >= (headerTop - 50) - headerHeight)
     {
       current = header;
     }
