@@ -43,18 +43,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git checkout pages
+          git checkout --orphan temp-pages
 
-          git rm -rf .
-          git reset -- docs
-
-          git reset --soft HEAD
+          git rm -r --cached .
+          git add docs
+          git clean -df
 
           mv docs/* .
           rm -r docs
 
           git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
+
+          git branch -M temp-pages pages
 
           git push --force origin pages
 
