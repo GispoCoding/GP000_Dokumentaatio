@@ -4,9 +4,8 @@ on:
     branches:
       - main
     paths:
-        - src/**/*
-        - assets/*
-
+      - src/G*/*
+      - assets/*
 
 jobs:
   check-changes:
