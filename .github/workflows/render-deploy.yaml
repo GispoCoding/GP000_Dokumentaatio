@@ -46,7 +46,7 @@ jobs:
           git checkout pages
 
           git add docs/G*
-          git commit -m "Automatic: Update docs"
+          git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
 
           git push origin pages
 
