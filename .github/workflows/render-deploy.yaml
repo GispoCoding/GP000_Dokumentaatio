@@ -44,8 +44,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git checkout pages
-          git status
-          ls
+
+          git rm -rf .
+          git reset -- docs
+
+          git reset --soft HEAD
 
           mv docs/* .
           rm -r docs
