@@ -1,6 +1,6 @@
 # Harjoitus 1: Digitoinnin perusteet
 
-testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
 
 **Harjoituksen sisältö**
 
