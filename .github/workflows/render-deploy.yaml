@@ -48,7 +48,7 @@ jobs:
           git add docs/G*
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
 
-          git push origin pages
+          git push --force origin pages
 
       # - name: Add, Commit & Push
       #   uses: EndBug/add-and-commit@v7
