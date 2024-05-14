@@ -43,10 +43,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          git checkout pages
+
           git add docs/G*
           git commit -m "Automatic: Update docs"
 
-          git push origin HEAD:pages
+          git push origin pages
 
       # - name: Add, Commit & Push
       #   uses: EndBug/add-and-commit@v7
