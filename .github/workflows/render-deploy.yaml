@@ -43,7 +43,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git checkout -B --orphan pages
+          git branch -D pages
+          git switch --orphan pages
 
           mv docs/* .
           rm -r docs
@@ -53,8 +54,3 @@ jobs:
 
           git push --force origin pages
 
-      # - name: Add, Commit & Push
-      #   uses: EndBug/add-and-commit@v7
-      #   with:
-      #     add: "docs/G*"
-      #     message: "Automatic: Update docs"
