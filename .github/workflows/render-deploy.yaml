@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git checkout pages
+          git checkout -B pages
 
           git add docs/G*
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
