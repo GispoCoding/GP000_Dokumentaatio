@@ -45,6 +45,7 @@ jobs:
 
           git checkout pages
           git status
+          ls
 
           mv docs/* .
           rm -r docs
