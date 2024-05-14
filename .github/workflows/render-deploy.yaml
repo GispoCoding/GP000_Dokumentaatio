@@ -48,7 +48,7 @@ jobs:
           mv docs/* .
           rm -r docs
 
-          git add docs/G*
+          git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
 
           git push --force origin pages
