@@ -43,8 +43,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git branch -D pages
-          git switch --orphan pages
+          git checkout pages
+          git status
 
           mv docs/* .
           rm -r docs
