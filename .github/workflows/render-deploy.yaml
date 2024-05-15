@@ -18,6 +18,8 @@ jobs:
         run: |
           export WORKFLOW=true
 
+          echo ${{ github.event.client_payload }}
+
           for folder in ${CHANGED_COURSES}; do
             code="${folder#src/}"
             ./render.sh $code
