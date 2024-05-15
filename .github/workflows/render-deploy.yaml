@@ -70,11 +70,16 @@ jobs:
 
           git add G*
 
-          git add docs
+          if [ -d "docs" ]; then
+            git add docs
+          fi
+
           git clean -df
 
-          mv docs/* .
-          rm -r docs
+          if [ -d "docs" ]; then
+            mv docs/* .
+            rm -r docs
+          fi
 
           git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
