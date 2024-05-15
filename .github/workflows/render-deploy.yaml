@@ -56,7 +56,7 @@ jobs:
 
           git rm -r --cached .
 
-          git checkout pages -- ./G*
+          git checkout remotes/origin/pages -- ./G*
 
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
