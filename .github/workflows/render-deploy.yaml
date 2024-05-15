@@ -17,7 +17,7 @@ jobs:
 
       - name: Find directories with changed rmd or image files
         id: changed-files-dir-names
-        uses: tj-actions/changed-files@v41
+        uses: tj-actions/changed-files@v44
         with:
           files:  |
             src/G*/*.{rmd,Rmd}
@@ -28,14 +28,14 @@ jobs:
 
       - name: Render modified courses to HTML and move output to docs
         env:
-          CHANGED_COURSES: ${{ steps.changed-files-dir-names.all_changed_files }}
+          ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.all_changed_files }}
         run: |
           export WORKFLOW=true
 
           echo ${{ github.event.client_payload }}
-          echo $CHANGED_COURSES
+          echo $ALL_CHANGED_FILES
 
-          for folder in ${CHANGED_COURSES}; do
+          for folder in ${ALL_CHANGED_FILES}; do
             echo $folder
             code="${folder#src/}"
             ./render.sh $code
@@ -46,7 +46,7 @@ jobs:
 
       - name: Add, Commit & Push
         env:
-          CHANGED_COURSES: ${{ steps.changed-files-dir-names.all_changed_files }}
+          ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.all_changed_files }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
@@ -58,7 +58,7 @@ jobs:
 
           git checkout remotes/origin/pages -- ./G*
 
-          for folder in ${CHANGED_COURSES}; do
+          for folder in ${ALL_CHANGED_FILES}; do
             code="${folder#src/}"
             rm -rf $code
           done
