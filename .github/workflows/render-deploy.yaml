@@ -30,26 +30,26 @@ jobs:
       - name: Render modified courses to HTML and move output to docs
         env:
           WORKFLOW: true
-          ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
-          DELETED_DIRS: ${{ steps.changed-files-dir-names.outputs.deleted_files }}
+          CHANGED_DIRS: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
         run: |
-          echo $DELETED_DIRS
+          set -e
 
-          for folder in ${ALL_CHANGED_FILES}; do
-            echo "CHECKING FOLDER $folder"
-            if [ -d "$folder" ]; then
-              echo "FOUND: $folder"
-              code="${folder#src/}"
-              ./render.sh $code
-            fi
+          any_changed=false
+          for folder in ${CHANGED_DIRS}; do
+            any_changed=true
+            code="${folder#src/}"
+            ./render.sh $code
           done
 
-          cp ./assets/favicon.ico ./docs/favicon.ico
-          cp ./assets/index.html ./docs/index.html
+          if [ "$any_changed" = true ]; then
+            cp ./assets/favicon.ico ./docs/favicon.ico
+            cp ./assets/index.html ./docs/index.html
+          fi
 
       - name: Add, Commit & Push
         env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
+          CHANGED_DIRS: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
+          DELETED_DIRS: ${{ steps.changed-files-dir-names.outputs.deleted_files }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
@@ -63,7 +63,7 @@ jobs:
 
           git checkout remotes/origin/pages -- ./G*
 
-          for folder in ${ALL_CHANGED_FILES}; do
+          for folder in ${CHANGED_DIRS} ${DELETED_DIRS}; do
             code="${folder#src/}"
             rm -rf $code
           done
