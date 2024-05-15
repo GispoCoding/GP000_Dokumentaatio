@@ -34,17 +34,17 @@ jobs:
         run: |
           set -e
 
-          any_changed=false
           for folder in ${CHANGED_DIRS}; do
-            any_changed=true
             code="${folder#src/}"
             ./render.sh $code
           done
 
-          if [ "$any_changed" = true ]; then
-            cp ./assets/favicon.ico ./docs/favicon.ico
-            cp ./assets/index.html ./docs/index.html
+          if [ ! -d "docs" ]; then
+            mkdir docs
           fi
+
+          cp ./assets/favicon.ico ./docs/favicon.ico
+          cp ./assets/index.html ./docs/index.html
 
       - name: Add, Commit & Push
         env:
@@ -70,16 +70,11 @@ jobs:
 
           git add G*
 
-          if [ -d "docs" ]; then
-            git add docs
-          fi
-
+          git add docs
           git clean -df
 
-          if [ -d "docs" ]; then
-            mv docs/* .
-            rm -r docs
-          fi
+          mv docs/* .
+          rm -r docs
 
           git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
