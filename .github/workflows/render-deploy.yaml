@@ -33,7 +33,7 @@ jobs:
 
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
-            ./render.sh $code
+            ./render.sh all
           done
 
           cp ./assets/favicon.ico ./docs/favicon.ico
