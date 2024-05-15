@@ -5,7 +5,7 @@ testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
 **Harjoituksen sisältö**
 
 Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.
-
+test
 **Harjoituksen tavoite**
 
 Harjoituksen jälkeen osallistuja osaa lisätä ja luoda tasoja QGISiin.
