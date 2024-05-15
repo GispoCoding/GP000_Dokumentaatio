@@ -28,17 +28,17 @@ jobs:
 
       - name: Render modified courses to HTML and move output to docs
         env:
+          WORKFLOW: true
           ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
         run: |
-          export WORKFLOW=true
-
-          echo ${{ github.event.client_payload }}
-          echo $ALL_CHANGED_FILES
 
           for folder in ${ALL_CHANGED_FILES}; do
-            echo $folder
-            code="${folder#src/}"
-            ./render.sh $code
+            echo "CHECKING FOLDER $folder"
+            if [ -d "$folder" ]; then
+              echo "FOUND: $folder"
+              code="${folder#src/}"
+              ./render.sh $code
+            fi
           done
 
           cp ./assets/favicon.ico ./docs/favicon.ico
