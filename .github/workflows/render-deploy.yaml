@@ -36,6 +36,9 @@ jobs:
             ./render.sh $code
           done
 
+          cp ./assets/favicon.ico ./docs/favicon.ico
+          cp ./assets/index.html ./docs/index.html
+
       - name: Add, Commit & Push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,8 +54,6 @@ jobs:
 
           mv docs/* .
           rm -r docs
-
-          git checkout pages -- .
 
           git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"

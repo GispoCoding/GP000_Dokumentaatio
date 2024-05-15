@@ -1,5 +1,7 @@
 # Harjoitus 4: Topologia ja geometria
 
+test
+
 **Harjoituksen sisältö**
 
 Harjoituksessa opetellaan käyttämään QGISia topologian ja geometrian tarkistukseen.
