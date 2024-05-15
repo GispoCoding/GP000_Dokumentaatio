@@ -52,6 +52,8 @@ jobs:
           mv docs/* .
           rm -r docs
 
+          git checkout pages -- .
+
           git add .
           git commit -m "Automatic: Render docs from ${GITHUB_SHA}"
 
