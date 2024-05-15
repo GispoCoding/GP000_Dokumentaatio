@@ -12,26 +12,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Find directories with changed rmd or image files
-        id: changed-files-dir-names
-        uses: tj-actions/changed-files@v41
-        with:
-          files:  |
-            src/G*/*.{rmd,Rmd}
-            src/G*/img/*.{png,gif}
-            src/G*/img/*/*.{png,gif}
-          dir_names: "true"
-          dir_names_max_depth: 2
+      # - name: Find directories with changed rmd or image files
+      #   id: changed-files-dir-names
+      #   uses: tj-actions/changed-files@v41
+      #   with:
+      #     files:  |
+      #       src/G*/*.{rmd,Rmd}
+      #       src/G*/img/*.{png,gif}
+      #       src/G*/img/*/*.{png,gif}
+      #     dir_names: "true"
+      #     dir_names_max_depth: 2
 
       - name: Render modified courses to HTML and move output to docs
+        env:
+          ALL_CHANGED_FOLDERS: ${{ steps.changed-rmd.outputs.all_changed_files }}"
         run: |
-          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
-          IFS=" "
-          read -ra folders <<< "$folder_list"
-
           export WORKFLOW=true
 
-          for folder in "${folders[@]}"; do
+          for folder in ${ALL_CHANGED_FOLDERS}; do
             code="${folder#src/}"
             ./render.sh $code
           done
@@ -41,14 +39,9 @@ jobs:
 
       - name: Add, Commit & Push
         env:
+          ALL_CHANGED_FOLDERS: ${{ steps.changed-rmd.outputs.all_changed_files }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
-          IFS=" "
-          read -ra folders <<< "$folder_list"
-          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
-
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -58,7 +51,7 @@ jobs:
 
           git checkout remotes/origin/pages -- ./G*
 
-          for folder in "${folders[@]}"; do
+          for folder in ${ALL_CHANGED_FOLDERS}; do
             code="${folder#src/}"
             rm -rf $code
           done
