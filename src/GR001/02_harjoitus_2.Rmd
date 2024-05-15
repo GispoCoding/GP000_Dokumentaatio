@@ -1,5 +1,7 @@
 # Harjoitus 2: Edistyneet digitointiominaisuudet
 
+test test
+
 **Harjoituksen sisältö**
 
 Harjoituksessa tehdään edistyneitä digitoinnin operaatioita QGISillä.
