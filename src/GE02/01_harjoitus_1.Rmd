@@ -4,7 +4,7 @@ testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
 
 **Harjoituksen sisältö**
 
-Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.test
+Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.testtest
 test
 **Harjoituksen tavoite**
 testtest
