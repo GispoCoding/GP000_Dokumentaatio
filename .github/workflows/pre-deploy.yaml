@@ -38,7 +38,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          client_payload: '{"CHANGED_COURSES": ${{ steps.changed-rmd.outputs.all_changed_files }}'
+          client_payload: '{"changed_courses": ${{ steps.changed-rmd.outputs.all_changed_files }}'
           event-type: render-deploy
 
       - name: Deploy if asset files changed
