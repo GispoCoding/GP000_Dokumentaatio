@@ -1,7 +1,10 @@
 name: Render to HTML & Deploy
 on:
-  repository_dispatch:
-    types: [render-deploy]
+  push:
+    branches:
+      - main
+    paths:
+      - src/G*/*
 
 jobs:
   check-changes:
@@ -12,9 +15,20 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Find directories with changed rmd or image files
+        id: changed-files-dir-names
+        uses: tj-actions/changed-files@v41
+        with:
+          files:  |
+            src/G*/*.{rmd,Rmd}
+            src/G*/img/*.{png,gif}
+            src/G*/img/*/*.{png,gif}
+          dir_names: "true"
+          dir_names_max_depth: 2
+
       - name: Render modified courses to HTML and move output to docs
         env:
-          CHANGED_COURSES: ${{ github.event.client_payload.changed_courses }}
+          CHANGED_COURSES: ${{ steps.changed-files-dir-names.all_changed_files }}
         run: |
           export WORKFLOW=true
 
@@ -32,7 +46,7 @@ jobs:
 
       - name: Add, Commit & Push
         env:
-          CHANGED_COURSES: ${{ github.event.client_payload.changed_courses }}
+          CHANGED_COURSES: ${{ steps.changed-files-dir-names.all_changed_files }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"

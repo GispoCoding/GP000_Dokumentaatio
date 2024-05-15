@@ -1,7 +1,10 @@
 name: Update assets
 on:
-  repository_dispatch:
-    types: [update-assets]
+  push:
+    branches:
+      - main
+    paths:
+      - assets/*
 
 jobs:
   update-preview:
