@@ -25,12 +25,15 @@ jobs:
             src/G*/img/*/*.{png,gif}
           dir_names: "true"
           dir_names_max_depth: 2
+          dir_names_deleted_files_include_only_deleted_dirs: "true"
 
       - name: Render modified courses to HTML and move output to docs
         env:
           WORKFLOW: true
           ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
+          DELETED_DIRS: ${{ steps.changed-files-dir-names.outputs.deleted_files }}
         run: |
+          echo $DELETED_DIRS
 
           for folder in ${ALL_CHANGED_FILES}; do
             echo "CHECKING FOLDER $folder"
@@ -49,6 +52,8 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
