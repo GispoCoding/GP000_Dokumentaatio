@@ -43,12 +43,28 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
+          IFS=" "
+          read -ra folders <<< "$folder_list"
+          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
+
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git checkout --orphan temp-pages
 
           git rm -r --cached .
+
+          git checkout pages -- ./G*
+
+          for folder in "${folders[@]}"; do
+            code="${folder#src/}"
+            rm -rf code
+          done
+
+          git add G*
+
           git add docs
           git clean -df
 
