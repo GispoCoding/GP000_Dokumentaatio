@@ -1,6 +1,6 @@
 # Harjoitus 2: Edistyneet digitointiominaisuudet
 
-test test
+test test test
 
 **Harjoituksen sisältö**
 
