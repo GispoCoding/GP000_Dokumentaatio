@@ -60,7 +60,7 @@ jobs:
 
           for folder in "${folders[@]}"; do
             code="${folder#src/}"
-            rm -rf code
+            rm -rf $code
           done
 
           git add G*
