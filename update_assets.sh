@@ -9,6 +9,8 @@ find "$src_folder" -type d -name "G*" -print0 | while IFS= read -r -d '' folder;
 
     cp assets/custom.html $folder
 
+    # Translate company type to either English or Swedish
+    # if course is marked as '_en' or '_sv'
     if [[ "$folder" == *eng* ]]; then
         sed -i 's/Oy\./Ltd\./g' "$folder/custom.html"
     elif [[ "$folder" == *sv* ]]; then
