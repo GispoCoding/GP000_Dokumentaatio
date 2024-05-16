@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - src/G*/**
-  repository-dispatch:
+  repository_dispatch:
     types: [update-assets]
 
 jobs:
