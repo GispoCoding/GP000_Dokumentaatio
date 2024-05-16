@@ -31,4 +31,5 @@ jobs:
       - name: Dispatch render-deploy
         uses: peter-evans/repository-dispatch@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: update-assets
