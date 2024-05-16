@@ -46,8 +46,7 @@ jobs:
             mkdir docs
           fi
 
-          cp ./assets/favicon.ico ./docs/favicon.ico
-          cp ./assets/index.html ./docs/index.html
+          cp ./pagesroot/* ./docs/
 
       - name: Add, Commit & Push
         env:
