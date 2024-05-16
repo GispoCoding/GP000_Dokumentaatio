@@ -4,7 +4,9 @@ on:
     branches:
       - main
     paths:
-      - assets/*
+      - template/*.{css,html}
+      - template/css/*
+      - template/js/*
 
 jobs:
   update-preview:
@@ -21,5 +23,5 @@ jobs:
       - name: Add, Commit & Push
         uses: EndBug/add-and-commit@v7
         with:
-          add: "src/G* docs/G* template"
-          message: "Automatic: Update assets"
+          add: "src/G*"
+          message: "Automatic: Update assets from ${{ github.sha }}"
