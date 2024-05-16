@@ -26,6 +26,8 @@ jobs:
         with:
           add: "src/G*"
           token: ${{ secrets.GITHUB_TOKEN }}
+          author_name: github-actions[bot]
+          author_email: github-actions[bot]@users.noreply.github.com
           message: "Automatic: Update assets from ${{ github.sha }}"
 
       - name: Dispatch render-deploy
