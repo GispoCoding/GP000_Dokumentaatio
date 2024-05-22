@@ -1,0 +1,38 @@
+
+name: Generate and serve changed course html files
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/G*/*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Check if enough lines were changed
+        id: enough_lines
+        run: |
+          BASE_REF="${{ github.event.pull_request.base.sha }}"
+          HEAD_REF="${{ github.event.pull_request.head.sha }}"
+
+          LINES_CHANGED=$(git diff --shortstat $BASE_REF $HEAD_REF | awk '{print $4 + $6}')
+
+          echo "Lines changed: $LINES_CHANGED"
+
+          echo "::set-output name=continue::true"
+          exit 0
+
+      - name: Continue if changes were big enough
+        if: steps.enough_lines.outputs.continue == 'true'
+        id: continue
+        run: |
+          echo "Continuing"
