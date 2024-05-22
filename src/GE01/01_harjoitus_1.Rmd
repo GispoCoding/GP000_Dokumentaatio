@@ -12,6 +12,8 @@ Harjoituksen jälkeen osallistuja osaa lisätä ja luoda tasoja QGISiin.
 
 **Arvioitu kesto** 
 
+test
+
 30 minuuttia.
 
 test
