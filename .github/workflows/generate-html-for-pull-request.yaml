@@ -50,14 +50,15 @@ jobs:
 
       - name: Render modified courses to HTML and move output to docs
         if: env.continue == 'true'
+        env:
+          WORKFLOW: true
+          CHANGED_DIRS: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
         run: |
-          folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
-          IFS=" "
-          read -ra folders <<< "$folder_list"
+          set -e
 
           export ARTIFACT=true
 
-          for folder in "${folders[@]}"; do
+          for folder in ${CHANGED_DIRS}; do
             code="${folder#src/}"
             ./render.sh $code
           done
