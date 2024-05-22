@@ -1,8 +1,11 @@
 name: Generate and serve changed course html files
 
 on:
-  repository_dispatch:
-    types: [serve-preview]
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/G*/*
 
 jobs:
   build-preview:
@@ -14,7 +17,26 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check if enough lines were changed
+        id: enough_lines
+        run: |
+          git checkout ${{ github.head_ref }}
+
+          LATEST=$(git rev-parse HEAD)
+          SECOND_LATEST=$(git rev-parse HEAD~1)
+
+          LINES_CHANGED=$(git diff --shortstat $SECOND_LATEST $LATEST | awk '{print $4 + $6}')
+
+          echo "Lines changed: $LINES_CHANGED"
+
+          if [ "$LINES_CHANGED" -gt 10 ]; then
+            echo "continue=true" >> $GITHUB_ENV
+          else
+            echo "continue=false" >> $GITHUB_ENV
+          fi
+
       - name: Find directories with changed rmd or image files
+        if: env.continue == 'true'
         id: changed-files-dir-names
         uses: tj-actions/changed-files@v41
         with:
@@ -27,6 +49,7 @@ jobs:
 
 
       - name: Render modified courses to HTML and move output to docs
+        if: env.continue == 'true'
         run: |
           folder_list="${{ steps.changed-files-dir-names.outputs.all_changed_files }}"
           IFS=" "
@@ -40,6 +63,7 @@ jobs:
           done
 
       - name: Upload artifacts
+        if: env.continue == 'true'
         id: upload-artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -48,6 +72,7 @@ jobs:
           retention-days: 7
 
       - name: Add Comment
+        if: env.continue == 'true'
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -59,4 +84,4 @@ jobs:
               repo: context.repo.repo,
               body: body
             });
-        
+
