@@ -18,6 +18,10 @@ test
 
 test
 
+test
+
+test
+
 ## **Valmistautuminen**
 
 Avaa uusi QGIS-projekti (**Projekti \> Uusi**) ja tallenna se nimellä "**QGIS-harjoitus 1test**".
