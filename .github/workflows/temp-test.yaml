@@ -18,10 +18,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get base branch
+        id: get_base
+        run: echo "::set-output name=base::${{ github.event.pull_request.base.ref }}"
+
+      - name: Fetch base branch
+        run: git fetch origin ${{ steps.get_base.outputs.base }}:refs/remotes/origin/${{ steps.get_base.outputs.base }}
+
       - name: Check if enough lines were changed
         id: enough_lines
         run: |
-          BASE_REF="${{ github.event.pull_request.base.sha }}"
+          BASE_REF="origin/${{ steps.get_base.outputs.base }}"
           HEAD_REF="${{ github.event.pull_request.head.sha }}"
 
           LINES_CHANGED=$(git diff --shortstat $BASE_REF $HEAD_REF | awk '{print $4 + $6}')
