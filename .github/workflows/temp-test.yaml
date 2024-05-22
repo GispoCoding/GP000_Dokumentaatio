@@ -21,6 +21,10 @@ jobs:
       - name: Check if enough lines were changed
         id: enough_lines
         run: |
+          git checkout ${{ github.head_ref }}
+
+          git status
+
           LATEST=$(git rev-parse HEAD)
           SECOND_LATEST=$(git rev-parse HEAD~1)
 
