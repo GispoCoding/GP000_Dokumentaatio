@@ -2,6 +2,7 @@
 
 testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
 
+
 **Harjoituksen sisältö**
 
 Harjoituksessa luodaan vektoriaineisto hyödyntäen digitoinnin perustyökaluja.testtest
