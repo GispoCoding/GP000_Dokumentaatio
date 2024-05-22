@@ -1,11 +1,8 @@
 name: Generate and serve changed course html files
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - src/G*/*
+  repository-dispatch:
+    types: [serve-preview]
 
 jobs:
   build-preview:

@@ -14,6 +14,10 @@ Harjoituksen jälkeen osallistuja osaa lisätä ja luoda tasoja QGISiin.
 
 30 minuuttia.
 
+test
+
+test
+
 ## **Valmistautuminen**
 
 Avaa uusi QGIS-projekti (**Projekti \> Uusi**) ja tallenna se nimellä "**QGIS-harjoitus 1test**".

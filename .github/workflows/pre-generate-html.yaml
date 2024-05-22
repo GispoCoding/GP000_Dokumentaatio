@@ -1,5 +1,5 @@
 
-name: Generate and serve changed course html files
+name: Check if enough lines were changed to generate preview html files
 
 on:
   pull_request:
@@ -23,8 +23,6 @@ jobs:
         run: |
           git checkout ${{ github.head_ref }}
 
-          git status
-
           LATEST=$(git rev-parse HEAD)
           SECOND_LATEST=$(git rev-parse HEAD~1)
 
@@ -32,11 +30,15 @@ jobs:
 
           echo "Lines changed: $LINES_CHANGED"
 
-          echo "::set-output name=continue::true"
-          exit 0
+          if [ "$LINES_CHANGED" -gt 10 ]; then
+            echo "continue=true" >> $GITHUB_ENV
+          else
+            echo "continue=false" >> $GITHUB_ENV
+          fi
 
-      - name: Continue if changes were big enough
-        if: steps.enough_lines.outputs.continue == 'true'
-        id: continue
-        run: |
-          echo "Continuing"
+      - name: Dispatch other workflow if enough was changed
+        if: env.continue == 'false'
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: serve-preview
