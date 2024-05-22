@@ -51,12 +51,10 @@ jobs:
       - name: Render modified courses to HTML and move output to docs
         if: env.continue == 'true'
         env:
-          WORKFLOW: true
+          ARTIFACT: true
           CHANGED_DIRS: ${{ steps.changed-files-dir-names.outputs.all_changed_files }}
         run: |
           set -e
-
-          export ARTIFACT=true
 
           for folder in ${CHANGED_DIRS}; do
             code="${folder#src/}"
