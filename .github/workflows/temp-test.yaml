@@ -24,9 +24,15 @@ jobs:
           LATEST=$(git rev-parse HEAD)
           SECOND_LATEST=$(git rev-parse HEAD~1)
 
+          echo $LATEST
+          echo $SECOND_LATEST
+
           LINES_CHANGED=$(git diff --shortstat $SECOND_LATEST $LATEST | awk '{print $4 + $6}')
 
           echo "Lines changed: $LINES_CHANGED"
+
+          git status
+          git log
 
           echo "::set-output name=continue::true"
           exit 0
