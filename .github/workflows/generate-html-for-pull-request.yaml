@@ -1,7 +1,7 @@
 name: Generate and serve changed course html files
 
 on:
-  repository-dispatch:
+  repository_dispatch:
     types: [serve-preview]
 
 jobs:
