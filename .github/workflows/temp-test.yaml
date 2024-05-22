@@ -24,7 +24,7 @@ jobs:
           LATEST=$(git rev-parse HEAD)
           SECOND_LATEST=$(git rev-parse HEAD~1)
 
-          LINES_CHANGED=$(git diff --shortstat $SECOND $LATEST | awk '{print $4 + $6}')
+          LINES_CHANGED=$(git diff --shortstat $SECOND_LATEST $LATEST | awk '{print $4 + $6}')
 
           echo "Lines changed: $LINES_CHANGED"
 
