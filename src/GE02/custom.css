@@ -259,14 +259,6 @@ table td {
     display:block
 }
 
-.btn-next::after {
-    content: 'Seuraava';
-}
-
-.btn-prev::after {
-    content: 'Edellinen';
-}
-
 .btn:hover {
     color: #fbfbfb !important;
     text-decoration: none;
