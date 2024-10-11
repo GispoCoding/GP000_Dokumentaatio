@@ -21,6 +21,8 @@ documentclass: book
 
 ## Lataa PDF-versio kurssista
 
+muokataan jo julkaistua kurssia
+
 https://github.com/gispocoding/training-master-repo-dev/releases/download/GE01/GE01.pdf
 
 ## Tervetuloa kurssille!
