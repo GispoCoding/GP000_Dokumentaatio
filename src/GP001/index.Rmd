@@ -19,6 +19,10 @@ documentclass: book
 
 # Template
 
+## Lataa PDF-versio kurssista
+
+https://github.com/gispocoding/training-master-repo-dev/releases/download/GP001/GP001.pdf
+
 ## Tervetuloa kurssille!
 
 Kurssilla tehdään ja opitaan niitä ja näitä.
